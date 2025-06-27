@@ -1,0 +1,20 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: ai-api
+  namespace: ai-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-api
+  template:
+    metadata:
+      labels:
+        app: ai-api
+    spec:
+      containers:
+        - name: ai-api
+          image: bilalguirre/ai-api:v1
+          ports:
+            - containerPort: 8000
