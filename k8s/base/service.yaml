@@ -5,9 +5,8 @@ metadata:
   namespace: ai-app
 spec:
   selector:
-    app: ai-app
+    app: ai-api
   ports:
     - protocol: TCP
       port: 80
       targetPort: 8000
-  type: ClusterIP
