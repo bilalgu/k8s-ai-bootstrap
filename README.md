@@ -114,3 +114,5 @@ curl -X 'POST' 'http://local.ai-api/predict' \
 -H 'Content-Type: application/json' \
 -d '{"text": "I love meat and sports!"}'
 ```
+
+--> [See full roadmap](ROADMAP.md)
