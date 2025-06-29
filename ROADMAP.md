@@ -7,11 +7,11 @@
 | App           | Build a sentiment analysis API with FastAPI + Transformers                    |
 | Container     | Dockerize the app, push image to Docker Hub                                   |
 | Kubernetes    | Deploy the app on a local `k3d` cluster with manifests                        |
-| Ingress       | Expose the API via Ingress with a custom local domain (`local.ai-api.test`)   |
+| Ingress       | Expose the API via Ingress with a custom local domain (`local.ai-api`)        |
 | CI/CD         | Automate Docker image build & push using GitHub Actions                       |
 | Security      | Implement RBAC, manage secrets securely, add basic NetworkPolicy              |
 | Observability | Deploy Loki + Promtail + Grafana dashboards to collect and visualize app logs |
-| Monitoring    | Add readiness and liveness probes in Deployment                               |
+| Monitoring    | Add readiness in Deployment                                                   |
 | Documentation | Extend README and create docs ?                                               |
 
 ***
