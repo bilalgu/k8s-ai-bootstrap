@@ -1,0 +1,76 @@
+# Step 4 – Kubernetes Security
+
+**Objective:**
+
+Add a minimal security layer to the Kubernetes cluster to follow good practices:
+- Restrict user permissions (RBAC)
+- Store sensitive data securely (Secrets)
+- Control network traffic (NetworkPolicy)
+
+**Stack:**
+
+- [Kubernetes RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
+- [NetworkPolicy](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+
+**File structure:**
+
+```
+.  
+├── k8s/
+│   └── base/
+│       ├── networkpolicy.yaml
+│       ├── rbac.yaml
+│       ├── secret.yaml
+```
+
+**Notes:**
+
+- `RBAC` defines what a user can do in the `ai-app` namespace.
+- `Secrets` store sensitive values in base64 and inject them into the container.
+- **The `secret.yaml` must be applied before `deployment.yaml`**, because the deployment references it to inject the secret value.
+- `NetworkPolicy` restricts incoming traffic to only allow HTTP requests on port `8000`.
+
+**Deployment:**
+
+> Requirements: the cluster must already be deployed (cf. [02-kubernetes-k3d.md](02-kubernetes-k3d.md)).  
+> 
+> ⚠️ **Important:** Always apply `secret.yaml` **before** `deployment.yaml` or reapply the deployment to refresh env variables.
+
+Apply all resources:
+
+```bash
+kubectl apply -f k8s/base/rbac.yaml
+kubectl apply -f k8s/base/secret.yaml
+kubectl apply -f k8s/base/networkpolicy.yaml
+````
+
+**Validation:**
+
+1. Check status:
+
+```bash
+kubectl get roles,rolebindings,secrets,networkpolicies -n ai-app
+```
+
+2. *RBAC*
+
+```bash
+kubectl auth can-i get pods --as bilal -n ai-app
+kubectl auth can-i create pods --as bilal -n ai-app
+```
+
+3. *Secrets*
+
+```bash
+kubectl exec -it <pod-name> -n ai-app -- env | grep API_KEY
+```
+
+4. *NetworkPolicy*
+
+```bash
+kubectl run test-client --rm -it --image alpine/curl -- /bin/sh
+curl ai-api-service.ai-app:80
+
+# Modify the allowed port in networkpolicy.yaml to test blocking
+```
