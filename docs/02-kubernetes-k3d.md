@@ -16,11 +16,11 @@ Manually deploy the AI API to a local Kubernetes cluster using `k3d` and YAML ma
 .
 ├── k8s/
 │   └── base/
-│       ├── deployment.yaml
-│       ├── ingress.yaml
-│       ├── namespace.yaml
-│       ├── secret.yaml
-│       └── service.yaml
+│   │   ├── 01-namespace.yaml
+│   │   ├── 03-secret.yaml
+│   │   ├── 05-service.yaml
+│   │   ├── 06-deployment.yaml
+│   │   └── 07-ingress.yaml
 ```
 
 **Notes:**
@@ -28,16 +28,17 @@ Manually deploy the AI API to a local Kubernetes cluster using `k3d` and YAML ma
 - The `--port 80:80@loadbalancer` flag exposes port 80 of the local host to the internal k3d load balancer (Traefik by default). Without it, Ingress won’t be reachable from the machine.
 - The AI API image is pushed to [Docker Hub](https://hub.docker.com/): `docker pull bilalguirre/ai-api:v1`
 - Secrets are explained in [04-security-k8s.md](04-security-k8s.md)
+- The file prefixes `01-`, `02-`, … ensure that `kubectl apply -f k8s/base/` runs in the right order.
 
 **Deployment:**
 
 ```bash
 k3d cluster create ai-bootstrap --port 80:80@loadbalancer
-kubectl apply -f k8s/base/namespace.yaml
-kubectl apply -f k8s/base/secret.yaml
-kubectl apply -f k8s/base/deployment.yaml
-kubectl apply -f k8s/base/service.yaml
-kubectl apply -f k8s/base/ingress.yaml
+kubectl apply -f k8s/base/01-namespace.yaml
+kubectl apply -f k8s/base/03-secret.yaml
+kubectl apply -f k8s/base/05-service.yaml
+kubectl apply -f k8s/base/06-deployment.yaml
+kubectl apply -f k8s/base/07-ingress.yaml
 ````
 
 **Validation:**

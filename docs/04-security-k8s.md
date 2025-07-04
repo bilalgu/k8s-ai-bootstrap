@@ -19,9 +19,9 @@ Add a minimal security layer to the Kubernetes cluster to follow good practices:
 .  
 ├── k8s/
 │   └── base/
-│       ├── networkpolicy.yaml
-│       ├── rbac.yaml
-│       ├── secret.yaml
+│   │   ├── 02-rbac.yaml
+│   │   ├── 03-secret.yaml
+│   │   ├── 04-networkpolicy.yaml
 ```
 
 **Notes:**
@@ -30,6 +30,7 @@ Add a minimal security layer to the Kubernetes cluster to follow good practices:
 - `Secrets` store sensitive values in base64 and inject them into the container.
 - **The `secret.yaml` must be applied before `deployment.yaml`**, because the deployment references it to inject the secret value.
 - `NetworkPolicy` restricts incoming traffic to only allow HTTP requests on port `8000`.
+- The file prefixes `01-`, `02-`, … ensure that `kubectl apply -f k8s/base/` runs in the right order.
 
 **Deployment:**
 
@@ -40,8 +41,8 @@ Add a minimal security layer to the Kubernetes cluster to follow good practices:
 Apply all resources:
 
 ```bash
-kubectl apply -f k8s/base/rbac.yaml
-kubectl apply -f k8s/base/secret.yaml
+kubectl apply -f k8s/base/02-rbac.yaml
+kubectl apply -f k8s/base/03-secret.yaml
 kubectl apply -f k8s/base/networkpolicy.yaml
 ````
 

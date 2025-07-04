@@ -13,6 +13,7 @@
 | Observability | Deploy Loki + Promtail + Grafana dashboards to collect and visualize app logs |
 | Monitoring    | Add readiness in Deployment                                                   |
 | Documentation | Extend README and create docs ?                                               |
+> ⚠️ *Readiness/Liveness probes dropped for now → not critical for MVP, will revisit for more advanced apps.*
 
 ***
 

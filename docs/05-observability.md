@@ -19,10 +19,10 @@ Add a minimal observability stack to the cluster to collect and visualize logs f
 .  
 ├── k8s/
 │   └── observability/
-│       ├── grafana.yaml
-│       ├── loki.yaml
-│       ├── namespace.yaml
-│       └── promtail.yaml
+│       ├── 01-namespace.yaml
+│       ├── 02-loki.yaml
+│       ├── 03-promtail.yaml
+│       └── 04-grafana.yaml
 ```
 
 **Notes:**
@@ -38,10 +38,10 @@ Add a minimal observability stack to the cluster to collect and visualize logs f
 Apply all resources:
 
 ```bash
-kubectl apply -f k8s/observability/namespace.yaml
-kubectl apply -f k8s/observability/loki.yaml
-kubectl apply -f k8s/observability/promtail.yaml
-kubectl apply -f k8s/observability/grafana.yaml
+kubectl apply -f k8s/observability/01-namespace.yaml
+kubectl apply -f k8s/observability/02-loki.yaml
+kubectl apply -f k8s/observability/03-promtail.yaml
+kubectl apply -f k8s/observability/04-grafana.yaml
 ```
 
 **Validation:**
