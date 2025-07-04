@@ -63,14 +63,26 @@ kubectl auth can-i create pods --as bilal -n ai-app
 3. *Secrets*
 
 ```bash
-kubectl exec -it <pod-name> -n ai-app -- env | grep API_KEY
+kubectl exec -it -n ai-app <pod-name> -- env | grep API_KEY
 ```
 
 4. *NetworkPolicy*
 
 ```bash
 kubectl run test-client --rm -it --image alpine/curl -- /bin/sh
+```
+
+```bash
 curl ai-api-service.ai-app:80
 
 # Modify the allowed port in networkpolicy.yaml to test blocking
+```
+
+And you can always test from your local machine:
+
+```bash
+curl -X 'POST' 'http://local.ai-api/predict' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"text": "I love One Piece!"}'
 ```

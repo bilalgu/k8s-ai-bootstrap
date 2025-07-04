@@ -10,6 +10,7 @@ Detailed instructions for each phase are available in the `docs/` folder:
 - [Step 2 – Deploy to Kubernetes (k3d)](docs/02-kubernetes-k3d.md)
 - [Step 3 – CI/CD with GitHub Actions](docs/03-ci-cd-github-actions.md)
 - [Step 4 – Kubernetes Security](docs/04-security-k8s.md)
+- [Step 5 – Observability with Loki, Promtail & Grafana](docs/05-observability.md)
 ## Roadmap
 
 ➡️ See the [ROADMAP](ROADMAP.md) for upcoming features.
