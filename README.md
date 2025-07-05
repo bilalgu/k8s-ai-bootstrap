@@ -16,12 +16,11 @@ En clair : **gagner du temps, réduire le stress opérationnel, et itérer propr
 - **Docker** – Containerisation propre et reproductible
 - **Kubernetes local `k3d`** – Cluster local modulaire pour tout comprendre à la main
 - **Manifests K8s écrits à la main** – Namespace, Deployment, Service, Ingress
-- **Ingress** — Domaine local (`local.ai-api`)
 - **CI/CD GitHub Actions** – Pipeline automatisé pour builder l’image et la pousser sur Docker Hub
 - **RBAC, Secrets, NetworkPolicy** — Contrôle des accès et isolation réseau
 - **Loki + Promtail + Grafana** — Centralisation et visualisation des logs K8s
 
-## Pour qui est-ce utile ?
+## À qui ça s’adresse ?
 
 1. **CTOs et startups tech** qui veulent :
 	- Tester ou déployer une API IA sans galère infra
@@ -65,9 +64,9 @@ kubectl get all -n observability
 kubectl port-forward -n ai-app pod/<pod-name> 8000:8000
 
 curl -X POST http://127.0.0.1:8000/predict \
-	-H 'accept: application/json' \
-	-H "Content-Type: application/json" \
-	-d '{"text":"I love lifting heavy, sleeping well and watching One Piece."}'
+-H 'accept: application/json' \
+-H "Content-Type: application/json" \
+-d '{"text":"I love lifting heavy, sleeping well and watching One Piece."}'
 ```
 
 or
@@ -76,9 +75,9 @@ or
 echo "127.0.0.1 local.ai-api" | sudo tee /etc/hosts
 
 curl -X 'POST' 'http://local.ai-api/predict' \
-	-H 'accept: application/json' \
-	-H 'Content-Type: application/json' \
-	-d '{"text": "I hate McDo, chips and wasting hours on dumb series."}'
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"text": "I hate McDo, chips and wasting hours on dumb series."}'
 ```
 
 ### Test logs in Grafana
@@ -123,7 +122,7 @@ Si vous voulez :
 - L’adapter à votre POC IA,
 - Ou automatiser et sécuriser vos propres déploiements cloud,
 
-📬 **Écris-moi :**
+📬 **Écrivez-moi :**
 ## Me contacter
 
 - 🔗 [Mon LinkedIn](https://www.linkedin.com/in/bilal-guirre-395544221/)
