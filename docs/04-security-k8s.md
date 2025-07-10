@@ -43,7 +43,7 @@ Apply all resources:
 ```bash
 kubectl apply -f k8s/base/02-rbac.yaml
 kubectl apply -f k8s/base/03-secret.yaml
-kubectl apply -f k8s/base/networkpolicy.yaml
+kubectl apply -f k8s/base/04-networkpolicy.yaml
 ````
 
 **Validation:**

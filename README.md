@@ -10,13 +10,14 @@ Je développe ce projet pour **aider les CTOs et startups tech** à :
 
 En clair : **gagner du temps, réduire le stress opérationnel, et itérer proprement**.
 
-## Ce que contient cette stack (v1.0.0)
+## Ce que contient cette stack (v1.0.0+)
 
 - **Application IA FastAPI** – Exemple minimaliste : sentiment analysis via Hugging Face
 - **Docker** – Containerisation propre et reproductible
 - **Kubernetes local `k3d`** – Cluster local modulaire pour tout comprendre à la main
 - **Manifests K8s écrits à la main** – Namespace, Deployment, Service, Ingress
 - **CI/CD GitHub Actions** – Pipeline automatisé pour builder l’image et la pousser sur Docker Hub
+- **GitOps avec ArgoCD** – Cluster synchronisé avec Git, rollback et prune automatiques
 - **RBAC, Secrets, NetworkPolicy** — Contrôle des accès et isolation réseau
 - **Loki + Promtail + Grafana** — Centralisation et visualisation des logs K8s
 
@@ -56,7 +57,9 @@ kubectl apply -f k8s/observability/
 # Check status
 kubectl get all -n ai-app
 kubectl get all -n observability
-````
+```
+
+> **GitOps Tip:** To synchronize the entire cluster via ArgoCD, see [Step 6 – GitOps ArgoCD](docs/06-gitops-argocd.md).
 
 ### Test your API
 
@@ -109,6 +112,7 @@ This project uses GitHub Actions to:
 - [Step 3 – CI/CD with GitHub Actions](docs/03-ci-cd-github-actions.md)
 - [Step 4 – Kubernetes Security](docs/04-security-k8s.md)
 - [Step 5 – Observability with Loki, Promtail & Grafana](docs/05-observability.md)
+- [Step 6 – GitOps with ArgoCD](docs/06-gitops-argocd.md)
 
 ➡️ See the [ROADMAP](ROADMAP.md) for upcoming features.
 

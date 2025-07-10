@@ -48,6 +48,7 @@ kubectl apply -f k8s/base/07-ingress.yaml
 ```bash
 kubectl get all -n ai-app
 kubectl get ingress,secrets -n ai-app
+kubectl logs -n ai-app <pod-name>
 ```
 
 2. Hosts file update
