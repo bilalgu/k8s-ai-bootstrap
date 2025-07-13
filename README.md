@@ -1,37 +1,62 @@
 # k8s-ai-bootstrap — Stack Kubernetes IA prête à déployer
 
-> Déployez une API IA containerisée dans un cluster Kubernetes sécurisé et automatisé, pour **gagner du temps et éviter les erreurs**.
+> Une API IA containérisée, déployable localement **ou dans le cloud**, dans un cluster Kubernetes sécurisé et automatisé, pour **gagner du temps et éviter les erreurs**.
 
-Je développe ce projet pour **aider les CTOs et startups tech** à :
-- Mettre en ligne **rapidement** une API IA (FastAPI + modèle Hugging Face)
-- Comprendre et maîtriser chaque brique Kubernetes (namespace, deployment, ingress…)
-- Avoir une base **cloud-native, sécurisée, et automatisable** via CI/CD
+
+Je développe ce projet pour **aider les CTOs, startups tech et freelances** à :
+
+- **Mettre en ligne rapidement** une API IA (FastAPI + Hugging Face)
+    
+- Comprendre et maîtriser chaque brique Kubernetes (namespace, RBAC, ingress…)
+    
+- Disposer d’une base **cloud-native, sécurisée et automatisable** grâce au **CI/CD** et **GitOps**
+    
+- **Porter la stack** du local (`k3d`) vers un vrai cluster **GKE** avec **Terraform**
+    
 - **Éviter les erreurs manuelles** grâce à une infra reproductible et documentée
 
 En clair : **gagner du temps, réduire le stress opérationnel, et itérer proprement**.
 
+
 ## Ce que contient cette stack (v1.0.0+)
 
-- **Application IA FastAPI** – Exemple minimaliste : sentiment analysis via Hugging Face
-- **Docker** – Containerisation propre et reproductible
-- **Kubernetes local `k3d`** – Cluster local modulaire pour tout comprendre à la main
-- **Manifests K8s écrits à la main** – Namespace, Deployment, Service, Ingress
-- **CI/CD GitHub Actions** – Pipeline automatisé pour builder l’image et la pousser sur Docker Hub
-- **GitOps avec ArgoCD** – Cluster synchronisé avec Git, rollback et prune automatiques
-- **RBAC, Secrets, NetworkPolicy** — Contrôle des accès et isolation réseau
+- **Application IA FastAPI** — Exemple minimaliste : _sentiment analysis_ via Hugging Face
+    
+- **Docker** — Containerisation reproductible et versionnée
+    
+- **Cluster Kubernetes local `k3d`** — Pour tout comprendre à la main
+    
+- **Cluster GKE cloud** — Provisionné avec **Terraform**, pour valider l’extension cloud-ready
+    
+- **Manifests K8s écrits à la main** — Namespace, Deployment, Service, Ingress
+    
+- **GitOps avec ArgoCD** — Déploiement déclaratif, rollback et prune automatiques
+    
+- **CI/CD GitHub Actions** — Pipeline pour builder/pusher l’image Docker
+    
+- **RBAC, Secrets, NetworkPolicy** — Sécurité et isolation réseau dès la base
+    
 - **Loki + Promtail + Grafana** — Centralisation et visualisation des logs K8s
+
 
 ## À qui ça s’adresse ?
 
-1. **CTOs et startups tech** qui veulent :
-	- Tester ou déployer une API IA sans galère infra
-	- Avoir une base **Kubernetes claire, sécurisée et modulaire**
-	- Monter en compétence sur la mise en prod cloud-native
-	- Industrialiser rapidement un POC IA containerisé
+**1. CTOs et startups tech** qui veulent :
 
-2. **Freelances ou devs DevOps** qui veulent :
-	- Un modèle concret pour **industrialiser un microservice IA**
-	- Un point de départ pour étendre à un cluster cloud public
+- Tester ou déployer une API IA sans galère infra
+    
+- Une base **Kubernetes claire, modulaire et scalable**
+    
+- Monter en compétence sur la mise en prod cloud-native
+    
+- Industrialiser rapidement un **POC IA containerisé**
+
+**2. Freelances ou devs DevOps** qui veulent :
+
+- Un **exemple concret** pour industrialiser un microservice IA
+    
+- Une base pour étendre à un cluster **cloud public** sans repartir de zéro
+
 
 ## Objectifs du projet (version originale)
 
@@ -44,22 +69,40 @@ This project is both:
 
 ### Quick Start
 
+#### Option A – Deploy Manually (Learn)
+
 ```bash
 # Create your local cluster
 k3d cluster create ai-bootstrap --port 80:80@loadbalancer
 
-# Deploy app namespace & resources
+# Apply manifests manually
 kubectl apply -f k8s/base/
-
-# Deploy observability stack
 kubectl apply -f k8s/observability/
 
-# Check status
+# Check
 kubectl get all -n ai-app
 kubectl get all -n observability
 ```
 
-> **GitOps Tip:** To synchronize the entire cluster via ArgoCD, see [Step 6 – GitOps ArgoCD](docs/06-gitops-argocd.md).
+#### Option B – Deploy GitOps (Recommended)
+
+> Use ArgoCD to manage everything from Git.  
+> Requires your cluster to exist (`k3d` for local or `GKE` for cloud).
+
+```bash
+# Install ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Apply ArgoCD Applications
+kubectl apply -f argocd/
+
+# Check sync status
+kubectl get applications -n argocd
+```
+
+> Full steps → [Step 6 – GitOps with ArgoCD](docs/06-gitops-argocd.md)
+> Cloud version → [Step 7 – Cloud GKE](docs/07-cloud-gke.md)
 
 ### Test your API
 
@@ -113,13 +156,15 @@ This project uses GitHub Actions to:
 - [Step 4 – Kubernetes Security](docs/04-security-k8s.md)
 - [Step 5 – Observability with Loki, Promtail & Grafana](docs/05-observability.md)
 - [Step 6 – GitOps with ArgoCD](docs/06-gitops-argocd.md)
+- [Step 7 – Cloud GKE](docs/07-cloud-gke.md)
 
 ➡️ See the [ROADMAP](ROADMAP.md) for upcoming features.
+
 
 ## Qui suis-je
 
 Je m'appelle Bilal. 
-J’aime bâtir des infrastructures **robustes, lisibles et sécurisées** — des fondations qui tiennent la route, et qui permettent d’itérer vite et bien.
+J’aime bâtir des infrastructures **robustes, lisibles et sécurisées**, des fondations qui tiennent la route, et qui permettent d’itérer vite et bien.
 
 Si vous voulez :
 - Tester ce projet,

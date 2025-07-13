@@ -25,13 +25,12 @@ Use Git as the single source of truth and automate sync with ArgoCD.
 
 **Notes:**
 
+- **ArgoCD will install and synchronize the workloads, no need to `kubectl apply` your manifests manually !!**
 - Each `Application` watches a specific path (`k8s/base` or `k8s/observability`) and syncs to its namespace.
 - `targetRevision` defines which branch ArgoCD watches (`main`, `HEAD` or a test branch).
 - `prune: true` ensures that any resource not in Git is deleted → cluster always equals Git.
 
 **Deployment:**
-
-> Requirements: the cluster must already be deployed (see [02-kubernetes-k3d.md](02-kubernetes-k3d.md) & [04-security-k8s.md](04-security-k8s.md)).
 
 1. Create namespace & install ArgoCD:
 
