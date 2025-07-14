@@ -70,7 +70,7 @@ kubectl apply -f argocd/
 1. *Check ArgoCD Applications*
 
 ```bash
-kubectl get applications -n argocd
+watch kubectl get applications -n argocd
 ```
 
 > *Status should be `Synced` and `Healthy` for each Application.*

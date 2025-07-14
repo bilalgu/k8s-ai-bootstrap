@@ -30,6 +30,8 @@ kubectl top pod -n ai-app
 ```
 
 - The HPA can be tested both locally (`k3d`) and on GKE.
+- HPA scaling requires enough available capacity on Nodes. 
+	- For **cloud clusters**, make sure node pools have **`autoscaling`** enabled.
 
 **Deployment:**
 

@@ -32,6 +32,8 @@ En clair : **gagner du temps, réduire le stress opérationnel, et itérer propr
     
 - **GitOps avec ArgoCD** — Déploiement déclaratif, rollback et prune automatiques
     
+- **HorizontalPodAutoscaler (HPA)** — Scalabilité auto en fonction de la charge
+    
 - **CI/CD GitHub Actions** — Pipeline pour builder/pusher l’image Docker
     
 - **RBAC, Secrets, NetworkPolicy** — Sécurité et isolation réseau dès la base
@@ -102,6 +104,7 @@ kubectl get applications -n argocd
 ```
 
 > Full steps → [Step 6 – GitOps with ArgoCD](docs/06-gitops-argocd.md)
+>
 > Cloud version → [Step 7 – Cloud GKE](docs/07-cloud-gke.md)
 
 ### Test your API
@@ -157,8 +160,10 @@ This project uses GitHub Actions to:
 - [Step 5 – Observability with Loki, Promtail & Grafana](docs/05-observability.md)
 - [Step 6 – GitOps with ArgoCD](docs/06-gitops-argocd.md)
 - [Step 7 – Cloud GKE](docs/07-cloud-gke.md)
+- [Step 8 – Scalability with HPA](docs/08-scalability-hpa.md)
 
 ➡️ See the [ROADMAP](ROADMAP.md) for upcoming features.
+
 📌 See [CONVENTION](CONVENTION.md) for current naming rules.
 
 
