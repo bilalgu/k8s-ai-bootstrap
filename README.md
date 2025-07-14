@@ -1,4 +1,4 @@
-# k8s-ai-bootstrap — Stack Kubernetes IA prête à déployer
+# k8s-ai-bootstrap - Stack Kubernetes IA prête à déployer
 
 > Une API IA containérisée, déployable localement **ou dans le cloud**, dans un cluster Kubernetes sécurisé et automatisé, pour **gagner du temps et éviter les erreurs**.
 
@@ -18,7 +18,7 @@ Je développe ce projet pour **aider les CTOs, startups tech et freelances** à 
 En clair : **gagner du temps, réduire le stress opérationnel, et itérer proprement**.
 
 
-## Ce que contient cette stack (v1.0.0+)
+## Ce que contient cette stack (v1.3.0+)
 
 - **Application IA FastAPI** — Exemple minimaliste : _sentiment analysis_ via Hugging Face
     
@@ -159,6 +159,7 @@ This project uses GitHub Actions to:
 - [Step 7 – Cloud GKE](docs/07-cloud-gke.md)
 
 ➡️ See the [ROADMAP](ROADMAP.md) for upcoming features.
+📌 See [CONVENTION](CONVENTION.md) for current naming rules.
 
 
 ## Qui suis-je

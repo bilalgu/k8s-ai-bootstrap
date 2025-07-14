@@ -18,6 +18,13 @@ spec:
           image: bilalguirre/ai-api:v1
           ports:
             - containerPort: 8000
+          resources:
+            requests:
+              cpu: "400m"
+              memory: "400Mi"
+            limits:
+              cpu: "600m"
+              memory: "768Mi"
           env:
             - name: API_KEY
               valueFrom:
