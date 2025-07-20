@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: ai-api-ingress
   namespace: ai-app
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
 spec:
   rules:
     - host: local.ai-api
@@ -15,3 +17,7 @@ spec:
                 name: ai-api-service
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - local.ai-api
+      secretName: ai-api-tls

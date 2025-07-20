@@ -66,8 +66,8 @@ kubectl apply -f argocd/
 Modify a manifest:
 
 ```bash
-sed -i 's/replicas: 1/replicas: 2/' k8s/base/06-deployment.yaml
-git add k8s/base/06-deployment.yaml
+sed -i 's/replicas: 1/replicas: 2/' k8s/base/07-deployment.yaml
+git add k8s/base/07-deployment.yaml
 git commit -m "increase replicas"
 git push -u origin gitops-test
 date
@@ -105,7 +105,7 @@ date -d $(kubectl describe applications -n argocd ai-app | grep -e "Finished At"
 Create a configmap:
 
 ```bash
-cat <<EOF > k8s/base/08-configmap-test.yaml
+cat <<EOF > k8s/base/10-configmap-test.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -119,7 +119,7 @@ EOF
 Check that ArgoCD creates it:
 
 ```bash
-git add k8s/base/08-configmap-test.yaml
+git add k8s/base/10-configmap-test.yaml
 git commit -m "add configmap for prune test"
 git push
 
@@ -131,9 +131,9 @@ date -d $(kubectl describe applications -n argocd ai-app | grep -e "Finished At"
 Remove the configmap from Git → ArgoCD should prune it:
 
 ```bash
-rm k8s/base/08-configmap-test.yaml
+rm k8s/base/10-configmap-test.yaml
 
-git add k8s/base/08-configmap-test.yaml
+git add k8s/base/10-configmap-test.yaml
 git commit -m "remove configmap to test prune"
 git push
 

@@ -1,7 +1,6 @@
 # k8s-ai-bootstrap - Stack Kubernetes IA prête à déployer
 
-> Une API IA containérisée, déployable localement **ou dans le cloud**, dans un cluster Kubernetes sécurisé et automatisé, pour **gagner du temps et éviter les erreurs**.
-
+> Du POC IA locale (`k3d`) jusqu’au cluster cloud (GKE), avec CI/CD, GitOps et sécurité intégrée.
 
 Je développe ce projet pour **aider les CTOs, startups tech et freelances** à :
 
@@ -33,6 +32,8 @@ En clair : **gagner du temps, réduire le stress opérationnel, et itérer propr
 - **GitOps avec ArgoCD** — Déploiement déclaratif, rollback et prune automatiques
     
 - **HorizontalPodAutoscaler (HPA)** — Scalabilité auto en fonction de la charge
+    
++ **TLS Ingress (Traefik + cert-manager)** — HTTPS local avec certificat auto-signé
     
 - **CI/CD GitHub Actions** — Pipeline pour builder/pusher l’image Docker
     
@@ -75,7 +76,9 @@ This project is both:
 
 ```bash
 # Create your local cluster
-k3d cluster create ai-bootstrap --port 80:80@loadbalancer
+k3d cluster create ai-bootstrap \
+  --port 80:80@loadbalancer \
+  --port 443:443@loadbalancer
 
 # Apply manifests manually
 kubectl apply -f k8s/base/
@@ -112,7 +115,7 @@ kubectl get applications -n argocd
 ```bash
 kubectl port-forward -n ai-app pod/<pod-name> 8000:8000
 
-curl -X POST http://127.0.0.1:8000/predict \
+curl http://127.0.0.1:8000/predict \
 -H 'accept: application/json' \
 -H "Content-Type: application/json" \
 -d '{"text":"I love lifting heavy, sleeping well and watching One Piece."}'
@@ -122,11 +125,24 @@ or
 
 ```bash
 echo "127.0.0.1 local.ai-api" | sudo tee /etc/hosts
+```
 
-curl -X 'POST' 'http://local.ai-api/predict' \
+#### Options A - HTTP
+
+```bash
+curl 'http://local.ai-api/predict' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
 -d '{"text": "I hate McDo, chips and wasting hours on dumb series."}'
+```
+
+#### Options B - HTTPS with Ingress TLS
+
+```bash
+curl -k 'https://local.ai-api/predict' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"text": "Growth is fun. Being stronger, smarter, and free every day --> that’s the life!"}'
 ```
 
 ### Test logs in Grafana
@@ -161,6 +177,7 @@ This project uses GitHub Actions to:
 - [Step 6 – GitOps with ArgoCD](docs/06-gitops-argocd.md)
 - [Step 7 – Cloud GKE](docs/07-cloud-gke.md)
 - [Step 8 – Scalability with HPA](docs/08-scalability-hpa.md)
++ [Step 9 – Ingress + TLS (Self-signed)](docs/09-ingress-tls.md)
 
 ➡️ See the [ROADMAP](ROADMAP.md) for upcoming features.
 

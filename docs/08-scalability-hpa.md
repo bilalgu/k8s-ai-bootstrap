@@ -15,7 +15,7 @@ Enable horizontal scaling for the AI API using a `HorizontalPodAutoscaler` (HPA)
 .
 ├── k8s/
 │   ├── base/
-│   │   ├── 06-deployment.yaml
+│   │   ├── 07-deployment.yaml
 │   │   └── 08-hpa.yaml
 ```
 

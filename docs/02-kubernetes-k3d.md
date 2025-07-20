@@ -18,9 +18,9 @@ Manually deploy the AI API to a local Kubernetes cluster using `k3d` and YAML ma
 │   └── base/
 │   │   ├── 01-namespace.yaml
 │   │   ├── 03-secret.yaml
-│   │   ├── 05-service.yaml
-│   │   ├── 06-deployment.yaml
-│   │   └── 07-ingress.yaml
+│   │   ├── 06-service.yaml
+│   │   ├── 07-deployment.yaml
+│   │   └── 09-ingress.yaml
 ```
 
 **Notes:**
@@ -36,9 +36,9 @@ Manually deploy the AI API to a local Kubernetes cluster using `k3d` and YAML ma
 k3d cluster create ai-bootstrap --port 80:80@loadbalancer
 kubectl apply -f k8s/base/01-namespace.yaml
 kubectl apply -f k8s/base/03-secret.yaml
-kubectl apply -f k8s/base/05-service.yaml
-kubectl apply -f k8s/base/06-deployment.yaml
-kubectl apply -f k8s/base/07-ingress.yaml
+kubectl apply -f k8s/base/06-service.yaml
+kubectl apply -f k8s/base/07-deployment.yaml
+kubectl apply -f k8s/base/09-ingress.yaml
 ````
 
 **Validation:**
